@@ -1,59 +1,133 @@
 <!DOCTYPE html>
 <!--
-  PORTFOLIO PROFISSIONAL - Cristian Souza
+  PORTFOLIO PROFISSIONAL - Origin Genesis
   Self-contained: depende so das fontes Google (Bricolage Grotesque + Manrope).
   Sem build, sem JS externo, sem framework. Funciona aberto direto (file://) e publicado.
+  Tema: DARK (paleta Origin Genesis) — Deep Navy base, Ghost White texto, Electric Cyan acao.
 -->
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cristian Souza | Sites, agentes de IA e sistemas que vendem</title>
-<meta name="description" content="Crio sites, sistemas e agentes de IA para empresas que querem atrair mais clientes e construir autoridade online.">
-<meta name="theme-color" content="#1a3fa4">
+<title>Origin Genesis | Sites, agentes de IA e sistemas que vendem</title>
+<meta name="description" content="Criamos sites, sistemas e agentes de IA para empresas que querem atrair mais clientes e construir autoridade online.">
+<meta name="theme-color" content="#0A192F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b6b5b'/%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="images/favicon/favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
+<link rel="shortcut icon" href="images/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+<link rel="manifest" href="images/favicon/site.webmanifest">
 <style>
+  :root {
+    /* ===== PALETA DARK — Origin Genesis. Troque so aqui para reaplicar no site inteiro ===== */
+    --bg:          #0A192F;   /* Deep Navy — fundo base */
+    --bg-alt:      #0c2038;   /* navy levemente mais claro — secoes alternadas */
+    --surface:     #112240;   /* cartoes */
+    --surface-2:   #16305c;   /* elevado / hover */
+    --border:      #22375f;   /* linhas / bordas sutis */
+    --text:        #E0E0E0;   /* Ghost White — texto principal */
+    --text-dim:    #9fb2cc;   /* texto de apoio */
+    --text-dimmer: #6b81a3;   /* rotulos / legendas */
+    --cyan:        #00FFFF;   /* Electric Cyan — acao / destaque */
+    --cyan-soft:   rgba(0,255,255,.12); /* preenchimento suave de acento */
+    --ink:         #0A192F;   /* texto sobre botao ciano */
+    --slate:       #52657F;   /* Slate Gray — suporte */
+    --wa:          #52657F;   /* botao flutuante do WhatsApp (Slate Gray) */
+  }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { margin: 0; }
-  a { color: #1a3fa4; text-decoration: none; }
-  a:hover { color: #0f2666; }
-  ::selection { background: #b8efd6; }
+  body { margin: 0; background: var(--bg); }
+  a { color: var(--cyan); text-decoration: none; }
+  a:hover { color: #7dffff; }
+  ::selection { background: rgba(0,255,255,.28); color: #04121f; }
   img { display: block; max-width: 100%; }
 
   @keyframes bubbleIn { from { opacity: 0; transform: translateY(14px) scale(.97); } to { opacity: 1; transform: none; } }
   @keyframes floatY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-  @keyframes softglow { 0%,100% { opacity:.5; } 50% { opacity:.85; } }
+  @keyframes softglow { 0%,100% { opacity:.5; } 50% { opacity:.9; } }
 
-  /* hover (substitui o style-hover do editor) */
-  .hv-wa:hover { background: #0f2666 !important; }
-  .hv-primary:hover { background: #0f2666 !important; transform: translateY(-1px); }
-  .hv-ghost:hover { border-color: #1a3fa4 !important; color: #1a3fa4 !important; }
-  .hv-card { transition: transform .2s, box-shadow .2s; }
-  .hv-card:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -30px rgba(13,27,22,.35); }
-  .hv-lift:hover { transform: translateY(-2px); }
-  .hv-white:hover { color: #fff !important; }
+  /* hover dos botoes */
+  .hv-wa:hover { background: #5cffff !important; }
+  .hv-primary:hover { background: #5cffff !important; transform: translateY(-1px); }
+  .hv-ghost:hover { border-color: var(--cyan) !important; color: var(--cyan) !important; }
+  .hv-card { transition: transform .2s, box-shadow .2s, border-color .2s; }
+  .hv-card:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -24px rgba(0,255,255,.28); border-color: rgba(0,255,255,.4) !important; }
+  .hv-lift:hover { transform: translateY(-2px); filter: brightness(1.08); }
+  .hv-white:hover { color: var(--cyan) !important; }
+
+  /* destaque dos links do menu ao passar o mouse */
+  .nav-link { position: relative; transition: color .2s; }
+  .nav-link::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px;
+    background: var(--cyan); border-radius: 2px;
+    transform: scaleX(0); transform-origin: left; transition: transform .22s ease;
+  }
+  .nav-link:hover { color: var(--cyan) !important; }
+  .nav-link:hover::after { transform: scaleX(1); box-shadow: 0 0 8px rgba(0,255,255,.7); }
+
+  /* ancoras nao ficam escondidas atras do header fixo */
+  #projetos, #sobre, #contato, #servicos { scroll-margin-top: 84px; }
+
+  /* botao hamburguer (menu mobile) */
+  .nav-toggle { display: none; flex: none; flex-direction: column; justify-content: center; gap: 5px; width: 46px; height: 42px; padding: 0; background: transparent; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; }
+  .nav-toggle span { display: block; width: 22px; height: 2px; margin: 0 auto; background: var(--text); border-radius: 2px; transition: transform .25s ease, opacity .2s ease; }
+  .nav-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.is-open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* painel do menu mobile */
+  .nav-mobile { display: none; position: absolute; left: 0; right: 0; top: 100%; }
+
+  /* diferenciais: impedir que palavras longas estourem a celula */
+  .feat-grid > div { min-width: 0; }
+  .feat-grid > div > div { overflow-wrap: anywhere; word-break: break-word; }
 
   /* responsivo */
   @media (max-width: 900px) {
     .hero-grid { grid-template-columns: 1fr !important; gap: 44px !important; padding: 52px 24px 64px !important; }
-    .ad-grid, .svc-grid, .steps-grid, .proj-grid, .about-grid { grid-template-columns: 1fr !important; }
+    .ad-grid, .svc-grid, .steps-grid, .proj-grid, .about-grid, .empresa-grid { grid-template-columns: 1fr !important; }
+    .empresa-grid { grid-template-areas: 'logo' 'feat' 'desc' !important; }
+    .feat-grid { grid-template-columns: repeat(5, 1fr) !important; }
     .h1-hero { font-size: 40px !important; }
     .h2-big { font-size: 32px !important; }
     .sec-pad { padding: 64px 24px !important; }
-    .about-photo { max-width: 320px; }
+    .about-photo { max-width: 320px; margin-left: auto; margin-right: auto; }
+    .hero-copy { text-align: center; }
+    .hero-copy > div { justify-content: center; }
+    .hero-copy p { margin-left: auto; margin-right: auto; }
+  }
+  @media (max-width: 720px) {
+    .nav-desktop { display: none !important; }
+    .nav-toggle { display: flex !important; }
+    .nav-mobile {
+      display: flex; flex-direction: column; gap: 4px;
+      max-height: 0; overflow: hidden; padding: 0 16px;
+      background: rgba(10,25,47,.98); backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border); border-bottom: 1px solid transparent;
+      box-shadow: 0 20px 40px -24px rgba(0,0,0,.85);
+      transition: max-height .32s ease, padding .32s ease;
+    }
+    .nav-mobile.open { max-height: 360px; padding: 12px 16px 18px; border-bottom-color: var(--border); }
+    .nav-mobile a { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 12px; font-weight: 600; font-size: 16px; color: var(--text); border-radius: 10px; }
+    .nav-mobile a:hover { background: var(--surface); color: var(--cyan); }
+    .nav-mobile .nav-mobile-cta { margin-top: 6px; background: var(--cyan); color: var(--ink); font-weight: 700; box-shadow: 0 8px 22px -10px rgba(0,255,255,.6); }
   }
   @media (max-width: 480px) {
     .h1-hero { font-size: 33px !important; }
     .h2-big { font-size: 27px !important; }
     .cta-big { font-size: 30px !important; }
+    .feat-grid { grid-template-columns: repeat(5, 1fr) !important; }
+    .feat-grid > div { padding: 12px 2px !important; gap: 7px !important; }
+    .feat-grid svg { width: 20px !important; height: 20px !important; }
+    .feat-grid > div > div { font-size: 8px !important; letter-spacing: 0 !important; line-height: 1.35 !important; }
   }
   @media (max-width: 640px) {
     .header-inner { padding: 14px 16px !important; }
     .logo-name { font-size: 17px !important; }
+    .logo-mark { width: 30px !important; height: 30px !important; }
     .nav-links { gap: 14px !important; }
     .nav-links .nav-link-text { display: none !important; }
     .cta-wa { padding: 9px 14px !important; font-size: 13.5px !important; gap: 6px !important; }
@@ -66,59 +140,74 @@
 </style>
 </head>
 <body>
-<div id="top" style="font-family: 'Manrope', system-ui, sans-serif; color: #10201b; background: #ffffff; overflow-x: hidden;">
+<div id="top" style="font-family: 'Manrope', system-ui, sans-serif; color: var(--text); background: var(--bg); overflow-x: clip;">
 
   <!-- HEADER -->
-  <header style="position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.86); backdrop-filter: blur(10px); border-bottom: 1px solid #eceeed;">
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(10,25,47,.82); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);">
     <div class="header-inner" style="max-width: 1180px; margin: 0 auto; padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-      <a href="#top" class="logo-name" style="flex: none; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: -.02em; color: #10201b; white-space: nowrap;">Cristian Souza</a>
-      <nav class="nav-links" style="display: flex; align-items: center; gap: 26px; flex: none;">
-        <a href="#servicos" style="font-weight: 600; font-size: 15px; color: #43524d; white-space: nowrap;"><span class="nav-link-text">Serviços</span></a>
-        <a href="#projetos" style="font-weight: 600; font-size: 15px; color: #43524d; white-space: nowrap;"><span class="nav-link-text">Projetos</span></a>
-        <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="hv-wa cta-wa" style="display: inline-flex; align-items: center; gap: 9px; background: #1a3fa4; color: #fff; font-weight: 700; font-size: 15px; padding: 11px 20px; border-radius: 999px; box-shadow: 0 6px 18px -8px rgba(11,107,91,.7); transition: background .2s; white-space: nowrap; flex: none;">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="#fff" style="flex: none;"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.85 9.85 0 001.599 5.283l-1 3.652 3.891-1.634zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414z"/></svg>
+      <a href="#top" class="logo-name" style="flex: none; display: inline-flex; align-items: center; gap: 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 20px; letter-spacing: -.02em; color: var(--text); white-space: nowrap;">
+        <img src="images/icon.png" alt="" class="logo-mark" width="40" height="40" style="width: 40px; height: 40px; border-radius: 9px; display: block; flex: none;">
+        Origin Genesis
+      </a>
+      <nav class="nav-links nav-desktop" style="display: flex; align-items: center; gap: 26px; flex: none;">
+        <a href="#projetos" class="nav-link" style="font-weight: 600; font-size: 15px; color: var(--text-dim); white-space: nowrap;"><span class="nav-link-text">Projetos</span></a>
+        <a href="#sobre" class="nav-link" style="font-weight: 600; font-size: 15px; color: var(--text-dim); white-space: nowrap;"><span class="nav-link-text">Sobre</span></a>
+        <a href="#contato" class="nav-link" style="font-weight: 600; font-size: 15px; color: var(--text-dim); white-space: nowrap;"><span class="nav-link-text">Contato</span></a>
+        <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="hv-wa cta-wa" style="display: inline-flex; align-items: center; gap: 9px; background: var(--cyan); color: var(--ink); font-weight: 700; font-size: 15px; padding: 11px 20px; border-radius: 999px; box-shadow: 0 6px 20px -6px rgba(0,255,255,.45); transition: background .2s; white-space: nowrap; flex: none;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="#0A192F" style="flex: none;"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.85 9.85 0 001.599 5.283l-1 3.652 3.891-1.634zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414z"/></svg>
           <span class="nav-link-text">Chamar no WhatsApp</span>
         </a>
       </nav>
+      <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-controls="navMobile" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
+    <!-- MENU MOBILE -->
+    <nav class="nav-mobile" id="navMobile">
+      <a href="#projetos">Projetos</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+      <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="nav-mobile-cta">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="#0A192F" style="flex: none;"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.85 9.85 0 001.599 5.283l-1 3.652 3.891-1.634zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414z"/></svg>
+        Chamar no WhatsApp
+      </a>
+    </nav>
   </header>
 
   <!-- HERO -->
-  <section style="position: relative; background: linear-gradient(180deg,#ffffff 0%,#f4f7f5 100%);">
+  <section style="position: relative; background: linear-gradient(180deg,#0A192F 0%,#0c2038 100%);">
     <div class="hero-grid" style="max-width: 1180px; margin: 0 auto; padding: 76px 28px 92px; display: grid; grid-template-columns: 1.05fr .95fr; gap: 60px; align-items: center;">
       <!-- left -->
-      <div>
-        <div style="display: inline-flex; align-items: center; gap: 8px; background: #e4f1ec; color: #1a3fa4; font-weight: 700; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; padding: 8px 14px; border-radius: 999px;">
-          <span style="width: 7px; height: 7px; border-radius: 50%; background: #16b56a; box-shadow: 0 0 0 3px rgba(22,181,106,.2);"></span>
+      <div class="hero-copy">
+        <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--cyan-soft); color: var(--cyan); font-weight: 700; font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(0,255,255,.25);">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 0 3px rgba(0,255,255,.2), 0 0 8px rgba(0,255,255,.8);"></span>
           Presença digital que gera autoridade
         </div>
-        <h1 class="h1-hero" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 56px; line-height: 1.03; letter-spacing: -.03em; margin: 22px 0 0; color: #0d1b16;">
-          Seu negócio cresce quando o digital<span style="color: #1a3fa4;"> trabalha por você.</span>
+        <h1 class="h1-hero" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 56px; line-height: 1.03; letter-spacing: -.03em; margin: 22px 0 0; color: var(--text);">
+          Seu negócio cresce quando o digital<span style="color: var(--cyan);"> trabalha por você.</span>
         </h1>
-        <p style="font-size: 18.5px; line-height: 1.6; color: #45554f; max-width: 520px; margin: 24px 0 0;">
-          Crio sites, sistemas e agentes de IA para empresas que querem atrair mais clientes e construir autoridade online, sem precisar entender nada de tecnologia.
+        <p style="font-size: 18.5px; line-height: 1.6; color: var(--text-dim); max-width: 520px; margin: 24px 0 0;">
+          Criamos sites, sistemas e agentes de IA para empresas que querem atrair mais clientes e construir autoridade online, sem precisar entender nada de tecnologia.
         </p>
         <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px;">
-          <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="hv-primary" style="display: inline-flex; align-items: center; gap: 10px; background: #1a3fa4; color: #fff; font-weight: 700; font-size: 16px; padding: 16px 26px; border-radius: 12px; box-shadow: 0 14px 30px -12px rgba(11,107,91,.8); transition: background .2s, transform .2s;">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="#fff"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.85 9.85 0 001.599 5.283l-1 3.652 3.891-1.634zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414z"/></svg>
-            Falar comigo agora
+          <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="hv-primary" style="display: inline-flex; align-items: center; gap: 10px; background: var(--cyan); color: var(--ink); font-weight: 700; font-size: 16px; padding: 16px 26px; border-radius: 12px; box-shadow: 0 14px 34px -12px rgba(0,255,255,.5); transition: background .2s, transform .2s;">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="#0A192F"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.85 9.85 0 001.599 5.283l-1 3.652 3.891-1.634zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414z"/></svg>
+            Falar com a gente agora
           </a>
-          <a href="#projetos" class="hv-ghost" style="display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #0d1b16; font-weight: 700; font-size: 16px; padding: 16px 24px; border-radius: 12px; border: 1.5px solid #d5ddd9; transition: border-color .2s, color .2s;">Ver projetos</a>
+          <a href="#projetos" class="hv-ghost" style="display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text); font-weight: 700; font-size: 16px; padding: 16px 24px; border-radius: 12px; border: 1.5px solid var(--border); transition: border-color .2s, color .2s;">Ver projetos</a>
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 22px 30px; margin-top: 38px;">
-          <div style="display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: 14.5px; color: #3a4842;"><span style="color:#1a3fa4;">✓</span> Entrega em dias, não meses</div>
-          <div style="display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: 14.5px; color: #3a4842;"><span style="color:#1a3fa4;">✓</span> Você fala direto comigo</div>
-          <div style="display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: 14.5px; color: #3a4842;"><span style="color:#1a3fa4;">✓</span> Feito pro seu negócio</div>
+          <div style="display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: 14.5px; color: var(--text-dim);"><span style="color:var(--cyan);">✓</span> Entrega em dias, não meses</div>
+          <div style="display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: 14.5px; color: var(--text-dim);"><span style="color:var(--cyan);">✓</span> Você fala direto com quem faz</div>
+          <div style="display: flex; align-items: center; gap: 9px; font-weight: 600; font-size: 14.5px; color: var(--text-dim);"><span style="color:var(--cyan);">✓</span> Feito pro seu negócio</div>
         </div>
       </div>
 
-      <!-- right: simulacao de conversa no whatsapp -->
+      <!-- right: simulacao de conversa no whatsapp (mantem cores autenticas do WhatsApp) -->
       <div style="position: relative; display: flex; justify-content: center;">
-        <div style="position: absolute; inset: -8% -4% -4% -4%; background: radial-gradient(60% 55% at 70% 30%, rgba(11,107,91,.22), transparent 70%); filter: blur(6px); animation: softglow 5s ease-in-out infinite;"></div>
-        <div style="position: relative; width: min(340px, 86vw); background: #0b141a; border-radius: 40px; padding: 12px; box-shadow: 0 40px 80px -30px rgba(7,61,52,.55), 0 0 0 1px rgba(0,0,0,.05); animation: floatY 6s ease-in-out infinite;">
+        <div style="position: absolute; inset: -8% -4% -4% -4%; background: radial-gradient(60% 55% at 70% 30%, rgba(0,255,255,.22), transparent 70%); filter: blur(6px); animation: softglow 5s ease-in-out infinite;"></div>
+        <div style="position: relative; width: min(340px, 86vw); background: #0b141a; border-radius: 40px; padding: 12px; box-shadow: 0 40px 80px -30px rgba(0,0,0,.7), 0 0 0 1px rgba(0,255,255,.12); animation: floatY 6s ease-in-out infinite;">
           <div style="border-radius: 30px; overflow: hidden; background: #efe7dd;">
             <div style="display: flex; align-items: center; gap: 11px; background: #075e54; padding: 15px 16px 13px;">
-              <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,#25d366,#1a3fa4); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-family: 'Bricolage Grotesque',sans-serif;">S</div>
+              <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg,#25d366,#00b3b3); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 800; font-family: 'Bricolage Grotesque',sans-serif;">S</div>
               <div style="flex: 1; min-width: 0;">
                 <div style="color: #fff; font-weight: 700; font-size: 15px;">Seu Atendimento</div>
                 <div style="color: #a9d8cf; font-size: 12px; display: flex; align-items: center; gap: 6px;">online agora</div>
@@ -143,11 +232,11 @@
                 Fechado! Agendei às 15h e te mando um lembrete mais tarde 👍
                 <span style="display:block; text-align:right; font-size:10px; color:#5aa77e; margin-top:3px;">09:42 ✓✓</span>
               </div>
-              <div style="align-self: center; margin-top: 4px; background: #1a3fa4; color: #fff; font-size: 11px; font-weight: 700; padding: 6px 13px; border-radius: 999px; animation: bubbleIn .5s ease both; animation-delay: 3s;">respondido em 4 segundos, sem você fazer nada</div>
+              <div style="align-self: center; margin-top: 4px; background: var(--cyan); color: var(--ink); font-size: 11px; font-weight: 700; padding: 6px 13px; border-radius: 999px; animation: bubbleIn .5s ease both; animation-delay: 3s;">respondido em 4 segundos, sem você fazer nada</div>
             </div>
             <div style="display: flex; align-items: center; gap: 8px; background: #efe7dd; padding: 10px 12px 12px;">
               <div style="flex: 1; background: #fff; border-radius: 999px; padding: 10px 14px; color: #98a29b; font-size: 13px;">Mensagem</div>
-              <div style="width: 40px; height: 40px; border-radius: 50%; background: #1a3fa4; display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></div>
+              <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--cyan); display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="#0A192F"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg></div>
             </div>
           </div>
         </div>
@@ -156,28 +245,28 @@
   </section>
 
   <!-- ANTES x DEPOIS -->
-  <section style="background: #0d1b16; color: #fff;">
+  <section style="background: var(--bg); color: var(--text); border-top: 1px solid var(--border);">
     <div class="sec-pad" style="max-width: 1180px; margin: 0 auto; padding: 88px 28px;">
       <div style="text-align: center; max-width: 640px; margin: 0 auto;">
-        <span style="font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #5fd0b4;">O problema</span>
-        <h2 class="h2-big" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 40px; line-height: 1.08; letter-spacing: -.02em; margin: 14px 0 0;">Você reconhece alguma dessas situações?</h2>
-        <p style="font-size: 17px; line-height: 1.6; color: #a9bab3; margin: 18px 0 0;">Quase todo negócio perde cliente pelo mesmo motivo: a parte técnica trava. É exatamente aí que eu entro.</p>
+        <span style="font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan);">O problema</span>
+        <h2 class="h2-big" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 40px; line-height: 1.08; letter-spacing: -.02em; margin: 14px 0 0; color: var(--text);">Você reconhece alguma dessas situações?</h2>
+        <p style="font-size: 17px; line-height: 1.6; color: var(--text-dim); margin: 18px 0 0;">Quase todo negócio perde cliente pelo mesmo motivo: a parte técnica trava. É exatamente aí que a gente entra.</p>
       </div>
       <div class="ad-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 52px;">
-        <div style="background: #14261f; border: 1px solid #23372e; border-radius: 20px; padding: 32px;">
-          <div style="display: inline-flex; align-items: center; gap: 8px; color: #f3a3a3; font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 22px;">Hoje, sem estrutura</div>
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 32px;">
+          <div style="display: inline-flex; align-items: center; gap: 8px; color: #ff9d9d; font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 22px;">Hoje, sem estrutura</div>
           <div style="display: flex; flex-direction: column; gap: 18px;">
-            <div style="display: flex; gap: 13px;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(240,120,120,.15); color: #f3a3a3; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;">✕</span><p style="margin: 0; font-size: 15.5px; line-height: 1.5; color: #cdd8d2;">Não tem clareza se seu site gera demanda de clientes pro negócio.</p></div>
-            <div style="display: flex; gap: 13px;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(240,120,120,.15); color: #f3a3a3; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;">✕</span><p style="margin: 0; font-size: 15.5px; line-height: 1.5; color: #cdd8d2;">Mensagem no WhatsApp fica horas sem resposta e a venda esfria.</p></div>
-            <div style="display: flex; gap: 13px;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(240,120,120,.15); color: #f3a3a3; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;">✕</span><p style="margin: 0; font-size: 15.5px; line-height: 1.5; color: #cdd8d2;">Agenda, cadastro e pedido tudo no caderno ou espalhado em vários grupos e planilhas.</p></div>
+            <div style="display: flex; gap: 13px;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(255,120,120,.15); color: #ff9d9d; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;">✕</span><p style="margin: 0; font-size: 15.5px; line-height: 1.5; color: var(--text-dim);">Não tem clareza se seu site gera demanda de clientes pro negócio.</p></div>
+            <div style="display: flex; gap: 13px;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(255,120,120,.15); color: #ff9d9d; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;">✕</span><p style="margin: 0; font-size: 15.5px; line-height: 1.5; color: var(--text-dim);">Mensagem no WhatsApp fica horas sem resposta e a venda esfria.</p></div>
+            <div style="display: flex; gap: 13px;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(255,120,120,.15); color: #ff9d9d; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;">✕</span><p style="margin: 0; font-size: 15.5px; line-height: 1.5; color: var(--text-dim);">Agenda, cadastro e pedido tudo no caderno ou espalhado em vários grupos e planilhas.</p></div>
           </div>
         </div>
-        <div style="background: linear-gradient(160deg,#1a3fa4,#0f2666); border: 1px solid #127c68; border-radius: 20px; padding: 32px; box-shadow: 0 30px 60px -30px rgba(11,107,91,.9);">
-          <div style="display: inline-flex; align-items: center; gap: 8px; color: #b8f5df; font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 22px;">Depois, comigo</div>
+        <div style="background: linear-gradient(160deg,#0e2c54,#0a1f3d); border: 1px solid rgba(0,255,255,.3); border-radius: 20px; padding: 32px; box-shadow: 0 30px 60px -30px rgba(0,255,255,.35);">
+          <div style="display: inline-flex; align-items: center; gap: 8px; color: var(--cyan); font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 22px;">Depois, com a gente</div>
           <div style="display: flex; flex-direction: column; gap: 18px;">
-            <div style="display: flex; gap: 13px;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,.18); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;">✓</span><p style="margin: 0; font-size: 15.5px; line-height: 1.5; color: #eafaf4;">Uma página que gera demanda e vendas pro negócio.</p></div>
-            <div style="display: flex; gap: 13px;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,.18); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;">✓</span><p style="margin: 0; font-size: 15.5px; line-height: 1.5; color: #eafaf4;">Um agente que responde na hora, dia e noite, e não deixa venda escapar.</p></div>
-            <div style="display: flex; gap: 13px;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,.18); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;">✓</span><p style="margin: 0; font-size: 15.5px; line-height: 1.5; color: #eafaf4;">Um sistema simples pra organizar agenda, clientes e pedidos num lugar só.</p></div>
+            <div style="display: flex; gap: 13px;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(0,255,255,.16); color: var(--cyan); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;">✓</span><p style="margin: 0; font-size: 15.5px; line-height: 1.5; color: var(--text);">Uma página que gera demanda e vendas pro negócio.</p></div>
+            <div style="display: flex; gap: 13px;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(0,255,255,.16); color: var(--cyan); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;">✓</span><p style="margin: 0; font-size: 15.5px; line-height: 1.5; color: var(--text);">Um agente que responde na hora, dia e noite, e não deixa venda escapar.</p></div>
+            <div style="display: flex; gap: 13px;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(0,255,255,.16); color: var(--cyan); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;">✓</span><p style="margin: 0; font-size: 15.5px; line-height: 1.5; color: var(--text);">Um sistema simples pra organizar agenda, clientes e pedidos num lugar só.</p></div>
           </div>
         </div>
       </div>
@@ -185,111 +274,159 @@
   </section>
 
   <!-- SERVIÇOS -->
-  <section id="servicos" style="background: #f4f7f5;">
+  <section id="servicos" style="background: var(--bg-alt); border-top: 1px solid var(--border);">
     <div class="sec-pad" style="max-width: 1180px; margin: 0 auto; padding: 88px 28px;">
-      <span style="font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #1a3fa4;">O que eu faço por você</span>
-      <h2 class="h2-big" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 40px; line-height: 1.08; letter-spacing: -.02em; margin: 14px 0 0; max-width: 560px; color: #0d1b16;">Três formas de trazer mais resultado pro seu negócio</h2>
+      <span style="font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan);">O que fazemos por você</span>
+      <h2 class="h2-big" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 40px; line-height: 1.08; letter-spacing: -.02em; margin: 14px 0 0; max-width: 560px; color: var(--text);">Três formas de trazer mais resultado pro seu negócio</h2>
       <div class="svc-grid" style="display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 48px;">
-        <div class="hv-card" style="background: #fff; border: 1px solid #e6ebe8; border-radius: 20px; padding: 30px;">
-          <div style="width: 52px; height: 52px; border-radius: 14px; background: #e4f1ec; display: flex; align-items: center; justify-content: center; margin-bottom: 22px;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3fa4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg>
+        <div class="hv-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 30px;">
+          <div style="width: 52px; height: 52px; border-radius: 14px; background: var(--cyan-soft); display: flex; align-items: center; justify-content: center; margin-bottom: 22px;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00FFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg>
           </div>
-          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 21px; margin: 0 0 10px; color: #0d1b16;">Site ou página que vende</h3>
-          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: #4c5c56;">Um endereço profissional que aparece no Google e leva quem te acha direto pro seu WhatsApp, pronto pra fechar.</p>
+          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 21px; margin: 0 0 10px; color: var(--text);">Site ou página que vende</h3>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: var(--text-dim);">Um endereço profissional que aparece no Google e leva quem te acha direto pro seu WhatsApp, pronto pra fechar.</p>
         </div>
-        <div class="hv-card" style="background: #fff; border: 1px solid #e6ebe8; border-radius: 20px; padding: 30px;">
-          <div style="width: 52px; height: 52px; border-radius: 14px; background: #e4f1ec; display: flex; align-items: center; justify-content: center; margin-bottom: 22px;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3fa4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-9 8.5 8.5 8.5 0 01-3.9-.9L3 21l1.9-4.1A8.38 8.38 0 013.5 11 8.5 8.5 0 0112 3a8.5 8.5 0 019 8.5z"/></svg>
+        <div class="hv-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 30px;">
+          <div style="width: 52px; height: 52px; border-radius: 14px; background: var(--cyan-soft); display: flex; align-items: center; justify-content: center; margin-bottom: 22px;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00FFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-9 8.5 8.5 8.5 0 01-3.9-.9L3 21l1.9-4.1A8.38 8.38 0 013.5 11 8.5 8.5 0 0112 3a8.5 8.5 0 019 8.5z"/></svg>
           </div>
-          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 21px; margin: 0 0 10px; color: #0d1b16;">Agente no WhatsApp</h3>
-          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: #4c5c56;">Responde seu cliente na hora, dia e noite, tira dúvidas e agenda por você. Nenhuma venda perdida por demora.</p>
+          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 21px; margin: 0 0 10px; color: var(--text);">Agente no WhatsApp</h3>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: var(--text-dim);">Responde seu cliente na hora, dia e noite, tira dúvidas e agenda por você. Nenhuma venda perdida por demora.</p>
         </div>
-        <div class="hv-card" style="background: #fff; border: 1px solid #e6ebe8; border-radius: 20px; padding: 30px;">
-          <div style="width: 52px; height: 52px; border-radius: 14px; background: #e4f1ec; display: flex; align-items: center; justify-content: center; margin-bottom: 22px;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1a3fa4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <div class="hv-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 30px;">
+          <div style="width: 52px; height: 52px; border-radius: 14px; background: var(--cyan-soft); display: flex; align-items: center; justify-content: center; margin-bottom: 22px;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#00FFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
           </div>
-          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 21px; margin: 0 0 10px; color: #0d1b16;">Sistema sob medida</h3>
-          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: #4c5c56;">Agenda, cadastro e controle do seu jeito, num só lugar. Chega de anotar tudo no caderno e perder informação.</p>
+          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 21px; margin: 0 0 10px; color: var(--text);">Sistema sob medida</h3>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: var(--text-dim);">Agenda, cadastro e controle do seu jeito, num só lugar. Chega de anotar tudo no caderno e perder informação.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- PROJETOS -->
-  <section id="projetos" style="background: #fff;">
+  <section id="projetos" style="background: var(--bg); border-top: 1px solid var(--border);">
     <div class="sec-pad" style="max-width: 1180px; margin: 0 auto; padding: 88px 28px;">
-      <span style="font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #1a3fa4;">Projetos</span>
-      <h2 class="h2-big" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 40px; line-height: 1.08; letter-spacing: -.02em; margin: 14px 0 0; max-width: 560px; color: #0d1b16;">Alguns exemplos do que eu entrego</h2>
-      <p style="font-size: 17px; line-height: 1.6; color: #4c5c56; margin: 18px 0 0; max-width: 620px;">Projetos de demonstração pra você ver o padrão do meu trabalho. Cada um pode virar exatamente a cara do seu negócio.</p>
+      <span style="font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan);">Projetos</span>
+      <h2 class="h2-big" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 40px; line-height: 1.08; letter-spacing: -.02em; margin: 14px 0 0; max-width: 560px; color: var(--text);">Alguns exemplos do que entregamos</h2>
+      <p style="font-size: 17px; line-height: 1.6; color: var(--text-dim); margin: 18px 0 0; max-width: 620px;">Trabalhos reais que já estão no ar. Clique em qualquer card para visitar o site.</p>
       <div class="proj-grid" style="display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 48px;">
-        <article class="hv-card" style="background: #fff; border: 1px solid #e6ebe8; border-radius: 20px; overflow: hidden;">
-          <div style="aspect-ratio: 16/10; background: linear-gradient(150deg,#1a3fa4,#0f2666); display: flex; align-items: flex-end; padding: 16px; color: rgba(255,255,255,.7); font-size: 12.5px; font-weight: 600;">[PLACEHOLDER: print do projeto]</div>
+        <a href="https://cristian-souza.github.io/mademoiselle-stilo-e-beleza/" target="_blank" rel="noopener" class="hv-card" style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; color: inherit;">
+          <!-- capa: troque por <img src="images/ARQUIVO" alt="Mademoiselle Stilo & Beleza" style="width:100%;aspect-ratio:16/10;object-fit:cover;"> quando tiver o print -->
+          <div style="aspect-ratio: 16/10; background: linear-gradient(150deg,#0891b2,#0a1f3d); display: flex; align-items: flex-end; padding: 16px; color: rgba(255,255,255,.75); font-size: 12.5px; font-weight: 600;">[PLACEHOLDER: print do projeto]</div>
           <div style="padding: 22px 22px 24px;">
-            <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #1a3fa4; background: #e4f1ec; padding: 4px 10px; border-radius: 999px;">Projeto de demonstração</span>
-            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: #0d1b16;">Site de barbearia</h3>
-            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4c5c56;">Página com agendamento e botão de WhatsApp, feita pra encher a agenda.</p>
+            <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cyan); background: var(--cyan-soft); padding: 4px 10px; border-radius: 999px;">Projeto no ar</span>
+            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: var(--text);">Mademoiselle Stilo &amp; Beleza</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--text-dim);">Cuidamos do seu cabelo, da sua pele e do seu estilo com toda a atenção que você merece. Ficamos na Correnteza, em Manacapuru, prontos para você marcar um horário e conhecer de perto o nosso trabalho.</p>
+            <span style="display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-weight: 700; font-size: 14px; color: var(--cyan);">Visitar site ↗</span>
           </div>
-        </article>
-        <article class="hv-card" style="background: #fff; border: 1px solid #e6ebe8; border-radius: 20px; overflow: hidden;">
-          <div style="aspect-ratio: 16/10; background: linear-gradient(150deg,#2452c0,#123280); display: flex; align-items: flex-end; padding: 16px; color: rgba(255,255,255,.7); font-size: 12.5px; font-weight: 600;">[PLACEHOLDER: print do projeto]</div>
+        </a>
+        <a href="https://cristian-souza.github.io/tbs-hotel/" target="_blank" rel="noopener" class="hv-card" style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; color: inherit;">
+          <!-- capa: troque por <img src="images/ARQUIVO" alt="Hotel TBS" style="width:100%;aspect-ratio:16/10;object-fit:cover;"> quando tiver o print -->
+          <div style="aspect-ratio: 16/10; background: linear-gradient(150deg,#2452c0,#0a1f3d); display: flex; align-items: flex-end; padding: 16px; color: rgba(255,255,255,.75); font-size: 12.5px; font-weight: 600;">[PLACEHOLDER: print do projeto]</div>
           <div style="padding: 22px 22px 24px;">
-            <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #1a3fa4; background: #e4f1ec; padding: 4px 10px; border-radius: 999px;">Projeto de demonstração</span>
-            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: #0d1b16;">Site de clínica</h3>
-            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4c5c56;">Institucional com serviços, convênios e captação de contato pra o consultório.</p>
+            <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cyan); background: var(--cyan-soft); padding: 4px 10px; border-radius: 999px;">Projeto no ar</span>
+            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: var(--text);">Hotel TBS</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--text-dim);">O seu refúgio de tranquilidade em Manacapuru tem nome: Hotel TBS!</p>
+            <span style="display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-weight: 700; font-size: 14px; color: var(--cyan);">Visitar site ↗</span>
           </div>
-        </article>
-        <article class="hv-card" style="background: #fff; border: 1px solid #e6ebe8; border-radius: 20px; overflow: hidden;">
-          <div style="aspect-ratio: 16/10; background: linear-gradient(150deg,#1533a0,#0a1a4d); display: flex; align-items: flex-end; padding: 16px; color: rgba(255,255,255,.7); font-size: 12.5px; font-weight: 600;">[PLACEHOLDER: print do projeto]</div>
+        </a>
+        <a href="https://cristian-souza.github.io/aej-polpas/" target="_blank" rel="noopener" class="hv-card" style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; color: inherit;">
+          <!-- capa: troque por <img src="images/ARQUIVO" alt="A & J Polpas" style="width:100%;aspect-ratio:16/10;object-fit:cover;"> quando tiver o print -->
+          <div style="aspect-ratio: 16/10; background: linear-gradient(150deg,#1533a0,#0a1a4d); display: flex; align-items: flex-end; padding: 16px; color: rgba(255,255,255,.75); font-size: 12.5px; font-weight: 600;">[PLACEHOLDER: print do projeto]</div>
           <div style="padding: 22px 22px 24px;">
-            <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #1a3fa4; background: #e4f1ec; padding: 4px 10px; border-radius: 999px;">Projeto de demonstração</span>
-            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: #0d1b16;">Site de advocacia</h3>
-            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4c5c56;">Página séria e confiável, com áreas de atuação e contato direto pra consultoria.</p>
+            <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cyan); background: var(--cyan-soft); padding: 4px 10px; border-radius: 999px;">Projeto no ar</span>
+            <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: var(--text);">A &amp; J Polpas</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--text-dim);">Vendemos e entregamos polpa de fruta 100% natural direto na sua casa, em Manacapuru. Chame no WhatsApp e peça em poucos minutos.</p>
+            <span style="display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-weight: 700; font-size: 14px; color: var(--cyan);">Visitar site ↗</span>
           </div>
-        </article>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- COMO FUNCIONA -->
-  <section style="background: #f4f7f5;">
+  <section style="background: var(--bg-alt); border-top: 1px solid var(--border);">
     <div class="sec-pad" style="max-width: 1180px; margin: 0 auto; padding: 88px 28px;">
-      <span style="font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #1a3fa4;">Como funciona</span>
-      <h2 class="h2-big" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 40px; line-height: 1.08; letter-spacing: -.02em; margin: 14px 0 0; max-width: 560px; color: #0d1b16;">Simples, do primeiro contato até a entrega</h2>
+      <span style="font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan);">Como funciona</span>
+      <h2 class="h2-big" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 40px; line-height: 1.08; letter-spacing: -.02em; margin: 14px 0 0; max-width: 560px; color: var(--text);">Simples, do primeiro contato até a entrega</h2>
       <div class="steps-grid" style="display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 48px; position: relative;">
         <div>
-          <div style="width: 46px; height: 46px; border-radius: 12px; background: #1a3fa4; color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Bricolage Grotesque',sans-serif; font-weight: 800; font-size: 20px; margin-bottom: 20px;">1</div>
-          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px; margin: 0 0 9px; color: #0d1b16;">Você me chama no WhatsApp</h3>
-          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: #4c5c56;">A gente conversa sobre o seu negócio e onde dá pra ganhar mais cliente. Sem termo técnico.</p>
+          <div style="width: 46px; height: 46px; border-radius: 12px; background: var(--cyan); color: var(--ink); display: flex; align-items: center; justify-content: center; font-family: 'Bricolage Grotesque',sans-serif; font-weight: 800; font-size: 20px; margin-bottom: 20px; box-shadow: 0 8px 22px -10px rgba(0,255,255,.6);">1</div>
+          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px; margin: 0 0 9px; color: var(--text);">Você chama a gente no WhatsApp</h3>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: var(--text-dim);">A gente conversa sobre o seu negócio e onde dá pra ganhar mais cliente. Sem termo técnico.</p>
         </div>
         <div>
-          <div style="width: 46px; height: 46px; border-radius: 12px; background: #1a3fa4; color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Bricolage Grotesque',sans-serif; font-weight: 800; font-size: 20px; margin-bottom: 20px;">2</div>
-          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px; margin: 0 0 9px; color: #0d1b16;">Eu monto a proposta</h3>
-          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: #4c5c56;">Mostro o que faz sentido pro seu momento e combino um valor especial pro primeiro trabalho.</p>
+          <div style="width: 46px; height: 46px; border-radius: 12px; background: var(--cyan); color: var(--ink); display: flex; align-items: center; justify-content: center; font-family: 'Bricolage Grotesque',sans-serif; font-weight: 800; font-size: 20px; margin-bottom: 20px; box-shadow: 0 8px 22px -10px rgba(0,255,255,.6);">2</div>
+          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px; margin: 0 0 9px; color: var(--text);">Montamos a proposta</h3>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: var(--text-dim);">Mostramos o que faz sentido pro seu momento e combinamos um valor especial pro primeiro trabalho.</p>
         </div>
         <div>
-          <div style="width: 46px; height: 46px; border-radius: 12px; background: #1a3fa4; color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Bricolage Grotesque',sans-serif; font-weight: 800; font-size: 20px; margin-bottom: 20px;">3</div>
-          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px; margin: 0 0 9px; color: #0d1b16;">Entrego e acompanho</h3>
-          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: #4c5c56;">Coloco no ar e fico por perto pra ajustar o que precisar. Você não fica sozinho depois.</p>
+          <div style="width: 46px; height: 46px; border-radius: 12px; background: var(--cyan); color: var(--ink); display: flex; align-items: center; justify-content: center; font-family: 'Bricolage Grotesque',sans-serif; font-weight: 800; font-size: 20px; margin-bottom: 20px; box-shadow: 0 8px 22px -10px rgba(0,255,255,.6);">3</div>
+          <h3 style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 20px; margin: 0 0 9px; color: var(--text);">Entregamos e acompanhamos</h3>
+          <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: var(--text-dim);">Colocamos no ar e ficamos por perto pra ajustar o que precisar. Você não fica sozinho depois.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- QUEM SOU -->
-  <section style="background: #fff;">
+  <!-- EMPRESA / ORIGIN GENESIS -->
+  <section style="background: var(--bg-alt); border-top: 1px solid var(--border);">
+    <div class="empresa-grid sec-pad" style="max-width: 1180px; margin: 0 auto; padding: 88px 28px; display: grid; grid-template-columns: .9fr 1.1fr; grid-template-areas: 'logo desc' 'feat desc'; gap: 32px 56px; align-items: start;">
+      <!-- COLUNA ESQUERDA: logo -->
+      <div style="grid-area: logo;">
+        <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 28px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 50px -24px rgba(0,255,255,.4);">
+          <img src="images/logo.png" alt="Logo da Origin Genesis" style="width: 100%; max-width: 340px; height: auto; display: block;">
+        </div>
+      </div>
+      <!-- COLUNA DIREITA: descricao da empresa -->
+      <div style="grid-area: desc;">
+        <span style="font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan);">A empresa</span>
+        <h2 class="h2-big" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 40px; line-height: 1.08; letter-spacing: -.02em; margin: 14px 0 0; color: var(--text);">Origin Genesis</h2>
+        <p style="font-size: 17.5px; line-height: 1.65; color: var(--text-dim); margin: 22px 0 0;">A Origin Genesis cria <strong style="color: var(--text);">sites, sistemas e agentes de IA sob medida</strong> para empresas que querem crescer no digital. Cada projeto é feito do zero, no jeito que o seu negócio precisa, sem modelo genérico e com toda a parte técnica por nossa conta.</p>
+        <p style="font-size: 17.5px; line-height: 1.65; color: var(--text-dim); margin: 18px 0 0;">Nascemos para <strong style="color: var(--text);">facilitar a vida de quem toca um negócio</strong>: automatizar a tarefa manual que consome tempo, organizar a operação num lugar só e ajudar você a escalar, atraindo mais clientes e construindo autoridade online, sem precisar entender de tecnologia.</p>
+      </div>
+      <!-- BARRA DE DIFERENCIAIS (abaixo da logo) -->
+      <div class="feat-grid" style="grid-area: feat; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden;">
+        <div style="background: var(--surface); padding: 16px 5px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00FFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgba(0,255,255,.45));"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <div style="font-weight: 700; font-size: 9px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.4; color: var(--text);">Desenvolvimento<br><span style="color: var(--text-dim); font-weight: 600;">Full-stack</span></div>
+        </div>
+        <div style="background: var(--surface); padding: 16px 5px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00FFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgba(0,255,255,.45));"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          <div style="font-weight: 700; font-size: 9px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.4; color: var(--text);">Arquitetura<br><span style="color: var(--text-dim); font-weight: 600;">Escalável</span></div>
+        </div>
+        <div style="background: var(--surface); padding: 16px 5px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00FFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgba(0,255,255,.45));"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          <div style="font-weight: 700; font-size: 9px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.4; color: var(--text);">Segurança<br><span style="color: var(--text-dim); font-weight: 600;">E performance</span></div>
+        </div>
+        <div style="background: var(--surface); padding: 16px 5px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00FFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgba(0,255,255,.45));"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>
+          <div style="font-weight: 700; font-size: 9px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.4; color: var(--text);">Soluções inteligentes<br><span style="color: var(--text-dim); font-weight: 600;">E personalizadas</span></div>
+        </div>
+        <div style="background: var(--surface); padding: 16px 5px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00FFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgba(0,255,255,.45));"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          <div style="font-weight: 700; font-size: 9px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.4; color: var(--text);">Foco, disciplina<br><span style="color: var(--text-dim); font-weight: 600;">E excelência</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre" style="background: var(--bg); border-top: 1px solid var(--border);">
     <div class="about-grid sec-pad" style="max-width: 1180px; margin: 0 auto; padding: 88px 28px; display: grid; grid-template-columns: .8fr 1.2fr; gap: 56px; align-items: start;">
       <div>
-        <span style="font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #1a3fa4;">Quem sou</span>
-        <div class="about-photo" style="margin-top: 24px; width: 100%; aspect-ratio: 1/1; border-radius: 20px; overflow: hidden;">
-          <img src="foto.jpeg" alt="Foto de Cristian Souza" style="width: 100%; height: 100%; object-fit: cover;">
+        <span style="font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan);">Sobre</span>
+        <div class="about-photo" style="margin-top: 24px; width: 100%; aspect-ratio: 1/1; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 0 40px -20px rgba(0,255,255,.4);">
+          <img src="images/foto.jpeg" alt="Foto de Cristian Souza" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
       </div>
       <div>
-        <h2 class="h2-big" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 34px; line-height: 1.12; letter-spacing: -.02em; margin: 0; color: #0d1b16;">Sou o Cristian Souza.</h2>
-        <p style="font-size: 17.5px; line-height: 1.65; color: #45554f; margin: 22px 0 0;">Comecei a trabalhar com tecnologia por um motivo simples: ajudar dono de negócio a vender mais e perder menos tempo com tarefa manual. Não gosto de complicar.</p>
-        <p style="font-size: 17.5px; line-height: 1.65; color: #45554f; margin: 18px 0 0;">Meu trabalho é resolver um problema concreto do seu negócio e deixar a parte técnica comigo. Se você topar, o primeiro passo é uma conversa rápida no WhatsApp, sem compromisso.</p>
-        <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="hv-wa" style="display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; background: #1a3fa4; color: #fff; font-weight: 700; font-size: 16px; padding: 14px 24px; border-radius: 12px; transition: background .2s;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.85 9.85 0 001.599 5.283l-1 3.652 3.891-1.634zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414z"/></svg>
+        <h2 class="h2-big" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 34px; line-height: 1.12; letter-spacing: -.02em; margin: 0; color: var(--text);">Prazer, sou o Cristian Souza.</h2>
+        <p style="font-size: 17.5px; line-height: 1.65; color: var(--text-dim); margin: 22px 0 0;">Sou desenvolvedor e o fundador da <strong style="color: var(--cyan);">Origin Genesis</strong>. Comecei a trabalhar com tecnologia por um motivo simples: ajudar dono de negócio a vender mais e perder menos tempo com tarefa manual. Não gosto de complicar, gosto de resolver.</p>
+        <p style="font-size: 17.5px; line-height: 1.65; color: var(--text-dim); margin: 18px 0 0;">Crio sites, sistemas e agentes de IA sob medida, cuidando de toda a parte técnica por você. Meu foco é resolver um problema concreto do seu negócio, do jeito mais direto possível. Se você topar, o primeiro passo é uma conversa rápida no WhatsApp, sem compromisso.</p>
+        <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="hv-wa" style="display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; background: var(--cyan); color: var(--ink); font-weight: 700; font-size: 16px; padding: 14px 24px; border-radius: 12px; box-shadow: 0 14px 30px -14px rgba(0,255,255,.5); transition: background .2s;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#0A192F"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.85 9.85 0 001.599 5.283l-1 3.652 3.891-1.634zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414z"/></svg>
           Conversar comigo
         </a>
       </div>
@@ -297,44 +434,98 @@
   </section>
 
   <!-- CTA FINAL -->
-  <section style="background: linear-gradient(160deg,#1a3fa4,#0f2666); color: #fff;">
+  <section style="background: radial-gradient(120% 120% at 50% 0%, #12315c 0%, #0a1f3d 55%, #0A192F 100%); color: var(--text); border-top: 1px solid rgba(0,255,255,.25);">
     <div style="max-width: 760px; margin: 0 auto; padding: 92px 28px; text-align: center;">
-      <h2 class="cta-big" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 42px; line-height: 1.08; letter-spacing: -.02em; margin: 0;">Vamos conversar sobre como usar tecnologia pra vender mais sem mais esforço?</h2>
-      <p style="font-size: 18px; line-height: 1.6; color: #c8e8de; margin: 20px 0 0;">Me chama no WhatsApp. A conversa é rápida, sem compromisso, e você já sai com um caminho claro do que dá pra melhorar.</p>
-      <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="hv-lift" style="display: inline-flex; align-items: center; gap: 10px; margin-top: 32px; background: #fff; color: #0f2666; font-weight: 700; font-size: 17px; padding: 17px 30px; border-radius: 12px; box-shadow: 0 18px 40px -18px rgba(0,0,0,.5); transition: transform .2s;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="#0f2666"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.85 9.85 0 001.599 5.283l-1 3.652 3.891-1.634zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414z"/></svg>
-        Falar comigo no WhatsApp
+      <h2 class="cta-big" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 42px; line-height: 1.08; letter-spacing: -.02em; margin: 0; color: var(--text);">Vamos conversar sobre como usar tecnologia pra vender mais sem mais esforço?</h2>
+      <p style="font-size: 18px; line-height: 1.6; color: var(--text-dim); margin: 20px 0 0;">Fala com a gente no WhatsApp. A conversa é rápida, sem compromisso, e você já sai com um caminho claro do que dá pra melhorar.</p>
+      <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="hv-lift" style="display: inline-flex; align-items: center; gap: 10px; margin-top: 32px; background: var(--cyan); color: var(--ink); font-weight: 700; font-size: 17px; padding: 17px 30px; border-radius: 12px; box-shadow: 0 18px 44px -16px rgba(0,255,255,.6); transition: transform .2s, filter .2s;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#0A192F"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.85 9.85 0 001.599 5.283l-1 3.652 3.891-1.634zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414z"/></svg>
+        Falar com a gente no WhatsApp
       </a>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer style="background: #0b141a; color: #cdd8d2;">
+  <!-- FOOTER / CONTATO -->
+  <footer id="contato" style="background: #06101f; color: var(--text-dim); border-top: 1px solid var(--border);">
     <div style="max-width: 1180px; margin: 0 auto; padding: 52px 28px; display: flex; flex-wrap: wrap; gap: 28px; justify-content: space-between; align-items: flex-start;">
       <div style="max-width: 340px;">
-        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 20px; color: #fff;">Cristian Souza</div>
-        <p style="margin: 12px 0 0; font-size: 14.5px; line-height: 1.6; color: #8fa39b;">Sites, agentes de WhatsApp e sistemas sob medida para o seu negócio.</p>
+        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 20px; color: var(--text);">Origin Genesis</div>
+        <p style="margin: 12px 0 0; font-size: 14.5px; line-height: 1.6; color: var(--text-dimmer);">Sites, agentes de WhatsApp e sistemas sob medida para o seu negócio.</p>
       </div>
       <div style="display: flex; gap: 40px;">
         <div style="display: flex; flex-direction: column; gap: 10px;">
-          <span style="font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #5e716a;">Contato</span>
-          <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="hv-white" style="color: #cdd8d2; font-size: 14.5px; transition: color .2s;">WhatsApp</a>
-          <a href="mailto:cristiansouza_dev@outlook.com" class="hv-white" style="color: #cdd8d2; font-size: 14.5px; transition: color .2s;">E-mail</a>
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cyan);">Contato</span>
+          <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="hv-white" style="color: var(--text-dim); font-size: 14.5px; transition: color .2s;">WhatsApp</a>
+          <a href="mailto:cristiansouza_dev@outlook.com" class="hv-white" style="color: var(--text-dim); font-size: 14.5px; transition: color .2s;">E-mail</a>
         </div>
         <div style="display: flex; flex-direction: column; gap: 10px;">
-          <span style="font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #5e716a;">Onde atuo</span>
-          <span style="color: #cdd8d2; font-size: 14.5px;">Atendimento remoto, todo o Brasil</span>
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cyan);">Onde atuo</span>
+          <span style="color: var(--text-dim); font-size: 14.5px;">Atendimento remoto, todo o Brasil</span>
         </div>
       </div>
     </div>
-    <div style="border-top: 1px solid #1c2a24;"><div style="max-width: 1180px; margin: 0 auto; padding: 18px 28px; font-size: 13px; color: #5e716a;">© Cristian Souza. Feito pra vender mais no digital.</div></div>
+    <div style="border-top: 1px solid var(--border);"><div style="max-width: 1180px; margin: 0 auto; padding: 18px 28px; font-size: 13px; color: var(--text-dimmer);">© Origin Genesis. Feito pra vender mais no digital.</div></div>
   </footer>
 
   <!-- FLOAT WHATSAPP -->
-  <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="hv-lift" aria-label="Falar no WhatsApp" style="position: fixed; right: 22px; bottom: 22px; z-index: 60; display: inline-flex; align-items: center; gap: 10px; background: #25d366; color: #0f2666; font-weight: 700; font-size: 15px; padding: 13px 20px; border-radius: 999px; box-shadow: 0 14px 30px -8px rgba(37,211,102,.7); transition: transform .2s;">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="#0f2666"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.85 9.85 0 001.599 5.283l-1 3.652 3.891-1.634zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414z"/></svg>
+  <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="hv-lift" aria-label="Falar no WhatsApp" style="position: fixed; right: 22px; bottom: 22px; z-index: 60; display: inline-flex; align-items: center; gap: 10px; background: var(--wa); color: var(--text); font-weight: 700; font-size: 15px; padding: 13px 20px; border-radius: 999px; box-shadow: 0 14px 30px -8px rgba(0,0,0,.6); border: 1px solid rgba(0,255,255,.25); transition: transform .2s, filter .2s;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="#E0E0E0"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.85 9.85 0 001.599 5.283l-1 3.652 3.891-1.634zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414z"/></svg>
     WhatsApp
   </a>
 </div>
+<script>
+  (function () {
+    var header = document.querySelector('header');
+    var btn = document.querySelector('.nav-toggle');
+    var menu = document.getElementById('navMobile');
+
+    function closeMenu() {
+      if (!menu || !btn) return;
+      menu.classList.remove('open');
+      btn.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Abrir menu');
+    }
+    function openMenu() {
+      menu.classList.add('open');
+      btn.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Fechar menu');
+    }
+
+    if (btn && menu) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (menu.classList.contains('open')) closeMenu(); else openMenu();
+      });
+      document.addEventListener('click', function (e) {
+        if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) closeMenu();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' || e.keyCode === 27) closeMenu();
+      });
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 720) closeMenu();
+      });
+    }
+
+    // rolagem suave dos links internos (funciona independente de quirks de CSS/overflow)
+    var links = document.querySelectorAll('a[href^="#"]');
+    Array.prototype.forEach.call(links, function (link) {
+      link.addEventListener('click', function (e) {
+        var hash = link.getAttribute('href');
+        if (!hash || hash.charAt(0) !== '#' || hash.length < 2) return;
+        var target = document.getElementById(hash.slice(1));
+        if (!target) return;
+        e.preventDefault();
+        closeMenu();
+        var offset = header ? header.offsetHeight + 12 : 0;
+        var top = (hash === '#top') ? 0 : (target.getBoundingClientRect().top + window.pageYOffset - offset);
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+        if (history.replaceState) history.replaceState(null, '', hash);
+      });
+    });
+  })();
+</script>
 </body>
 </html>
