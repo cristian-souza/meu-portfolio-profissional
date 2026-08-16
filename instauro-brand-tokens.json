@@ -1,0 +1,79 @@
+{
+  "$comment": "Brand tokens do Instauro — gerado a partir de instauro-guia-de-marca.md. Domínio, INPI e redes sociais seguem pendentes de checagem manual (ver validacao-nome-instauro.md, seção 5) antes de qualquer publicação real.",
+
+  "marca": {
+    "nome": "Instauro",
+    "origem": "latim, verbo 'instaurare' — preparar, renovar, estabelecer",
+    "monograma": "i.",
+    "comando_cli_exemplo": ["instauro init", "instauro build"]
+  },
+
+  "cores": {
+    "primaria": "#0F6E56",
+    "texto_base": "#0A2E27",
+    "fundo": "#F7F5F0",
+    "neutro_medio": "#4A4A47",
+    "neutro_claro": "#D8D6D0",
+    "branco": "#FFFFFF",
+    "acento_secundario": null,
+    "_nota_acento": "Não definido de propósito — ver seção 3 do guia de marca. Não adicionar cor de acento sem necessidade funcional real (ex: estados de erro/sucesso)."
+  },
+
+  "tipografia": {
+    "wordmark": {
+      "familia_recomendada": "Fraunces",
+      "alternativas": ["Source Serif 4", "Lora"],
+      "fallback": "Georgia, serif"
+    },
+    "corpo_ui": {
+      "familia_recomendada": "Inter",
+      "alternativas": ["IBM Plex Sans"],
+      "fallback": "-apple-system, BlinkMacSystemFont, sans-serif"
+    },
+    "codigo": {
+      "familia_recomendada": "IBM Plex Mono",
+      "alternativas": ["JetBrains Mono"],
+      "fallback": "ui-monospace, SFMono-Regular, monospace"
+    }
+  },
+
+  "logo": {
+    "simbolo_svg_path": "instauro-logo.svg",
+    "monograma_svg_path": "instauro-monograma.svg",
+    "espaco_respiro_minimo": "igual à altura da barra mais alta do símbolo",
+    "tamanho_minimo_simbolo_px": 24,
+    "usar_monograma_abaixo_de_px": 32,
+    "regras_proibidas": [
+      "rotacionar o símbolo",
+      "aplicar gradiente ou sombra",
+      "alterar o número de barras (4)",
+      "distorcer a proporção relativa das alturas"
+    ]
+  },
+
+  "acessibilidade": {
+    "contraste_primaria_sobre_fundo": "~4.6:1 (AA para texto grande/UI)",
+    "recomendacao_texto_corpo_pequeno": "usar texto_base (#0A2E27) sobre fundo (#F7F5F0), não primaria"
+  },
+
+  "voz": {
+    "tom": "direto, técnico, levemente formal — sem jargão de marketing inflado",
+    "risco_a_monitorar": "tom pode escorregar para burocrático/jurídico (associação com 'instaurar um inquérito') — evitar linguagem excessivamente formal em CTAs e mensagens de produto",
+    "evitar": "explicar o significado latino do nome de forma forçada na home"
+  },
+
+  "conteudo_pendente_para_o_site": {
+    "_nota": "Placeholders — preencher antes de publicar, não são copy final",
+    "tagline": null,
+    "descricao_curta": null,
+    "meta_description": null
+  },
+
+  "checklist_pre_publicacao": [
+    "Confirmar instauro.com.br em registro.br",
+    "Confirmar instauro.com / instauro.dev em registrador internacional",
+    "Buscar 'instauro' no INPI (busca.inpi.gov.br/pePI), classe 42",
+    "Confirmar @instauro disponível nas redes sociais e GitHub a serem usados",
+    "Testar o nome em voz alta com alguém de fora do projeto"
+  ]
+}
