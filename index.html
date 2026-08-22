@@ -59,6 +59,14 @@
   .hv-lift:hover { transform: translateY(-2px); filter: brightness(1.08); }
   .hv-white:hover { color: var(--cyan) !important; }
 
+  /* carrossel de projetos */
+  .proj-track { transition: transform .5s cubic-bezier(.4,0,.2,1); will-change: transform; }
+  .proj-slide { flex-shrink: 0; }
+  .proj-arrow:hover:not(:disabled) { border-color: var(--cyan) !important; color: var(--cyan) !important; }
+  .proj-arrow:disabled { opacity: .35; cursor: default; }
+  .proj-dot { width: 8px; height: 8px; padding: 0; border: none; border-radius: 50%; background: var(--border); cursor: pointer; transition: background .2s, transform .2s; }
+  .proj-dot.is-active { background: var(--cyan); transform: scale(1.25); }
+
   /* destaque dos links do menu ao passar o mouse */
   .nav-link { position: relative; transition: color .2s; }
   .nav-link::after {
@@ -82,16 +90,11 @@
   /* painel do menu mobile */
   .nav-mobile { display: none; position: absolute; left: 0; right: 0; top: 100%; }
 
-  /* diferenciais: impedir que palavras longas estourem a celula */
-  .feat-grid > div { min-width: 0; }
-  .feat-grid > div > div { overflow-wrap: anywhere; word-break: break-word; }
-
   /* responsivo */
   @media (max-width: 900px) {
     .hero-grid { grid-template-columns: 1fr !important; gap: 44px !important; padding: 52px 24px 64px !important; }
-    .ad-grid, .svc-grid, .steps-grid, .proj-grid, .about-grid, .empresa-grid { grid-template-columns: 1fr !important; }
-    .empresa-grid { grid-template-areas: 'logo' 'feat' 'desc' !important; }
-    .feat-grid { grid-template-columns: repeat(5, 1fr) !important; }
+    .ad-grid, .svc-grid, .steps-grid, .about-grid, .empresa-grid { grid-template-columns: 1fr !important; }
+    .empresa-grid { grid-template-areas: 'logo' 'desc' !important; }
     .h1-hero { font-size: 40px !important; }
     .h2-big { font-size: 32px !important; }
     .sec-pad { padding: 64px 24px !important; }
@@ -133,10 +136,6 @@
     .h1-hero { font-size: 33px !important; }
     .h2-big { font-size: 27px !important; }
     .cta-big { font-size: 30px !important; }
-    .feat-grid { grid-template-columns: repeat(5, 1fr) !important; }
-    .feat-grid > div { padding: 12px 2px !important; gap: 7px !important; }
-    .feat-grid svg { width: 20px !important; height: 20px !important; }
-    .feat-grid > div > div { font-size: 8px !important; letter-spacing: 0 !important; line-height: 1.35 !important; }
   }
   @media (max-width: 640px) {
     .header-inner { padding: 14px 16px !important; }
@@ -350,35 +349,56 @@
       <span style="font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan);">Projetos</span>
       <h2 class="h2-big" style="font-family: 'Fraunces', serif; font-weight: 800; font-size: 40px; line-height: 1.08; letter-spacing: -.02em; margin: 14px 0 0; max-width: 560px; color: var(--text);">Alguns exemplos do que entregamos</h2>
       <p style="font-size: 17px; line-height: 1.6; color: var(--text-dim); margin: 18px 0 0; max-width: 620px;">Trabalhos reais que já estão no ar. Clique em qualquer card para visitar o site.</p>
-      <div class="proj-grid" style="display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 48px;">
-        <a href="https://cristian-souza.github.io/mademoiselle-stilo-e-beleza/" target="_blank" rel="noopener" class="hv-card" style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; color: inherit;">
-          <!-- capa: troque por <img src="images/ARQUIVO" alt="Mademoiselle Stilo & Beleza" style="width:100%;aspect-ratio:16/10;object-fit:cover;"> quando tiver o print -->
-          <div style="aspect-ratio: 16/10; background: linear-gradient(150deg,#14876B,#0A2E27); display: flex; align-items: flex-end; padding: 16px; color: rgba(255,255,255,.75); font-size: 12.5px; font-weight: 600;">[PLACEHOLDER: print do projeto]</div>
-          <div style="padding: 22px 22px 24px;">
-            <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cyan); background: var(--cyan-soft); padding: 4px 10px; border-radius: 999px;">Projeto no ar</span>
-            <h3 style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: var(--text);">Mademoiselle Stilo &amp; Beleza</h3>
-            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--text-dim);">Cuidamos do seu cabelo, da sua pele e do seu estilo com toda a atenção que você merece. Ficamos na Correnteza, em Manacapuru, prontos para você marcar um horário e conhecer de perto o nosso trabalho.</p>
-            <span style="display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-weight: 700; font-size: 14px; color: var(--cyan);">Visitar site ↗</span>
+      <div class="proj-carousel" style="position: relative; margin-top: 48px;">
+        <div class="proj-viewport" style="overflow: hidden;">
+          <div class="proj-track" id="projTrack" style="display: flex; gap: 22px;">
+            <a href="https://cristian-souza.github.io/mademoiselle-stilo-e-beleza/" target="_blank" rel="noopener" class="hv-card proj-slide" style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; color: inherit;">
+              <img src="images/mademoiselle-stilo-e-beleza.png" alt="Mademoiselle Stilo & Beleza" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block;">
+              <div style="padding: 22px 22px 24px;">
+                <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cyan); background: var(--cyan-soft); padding: 4px 10px; border-radius: 999px;">Projeto no ar</span>
+                <h3 style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: var(--text);">Mademoiselle Stilo &amp; Beleza</h3>
+                <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--text-dim);">Cuidamos do seu cabelo, da sua pele e do seu estilo com toda a atenção que você merece. Ficamos na Correnteza, em Manacapuru, prontos para você marcar um horário e conhecer de perto o nosso trabalho.</p>
+                <span style="display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-weight: 700; font-size: 14px; color: var(--cyan);">Visitar site ↗</span>
+              </div>
+            </a>
+            <a href="https://cristian-souza.github.io/tbs-hotel/" target="_blank" rel="noopener" class="hv-card proj-slide" style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; color: inherit;">
+              <img src="images/tbs-hotel.png" alt="TBS Hotel" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block;">
+              <div style="padding: 22px 22px 24px;">
+                <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cyan); background: var(--cyan-soft); padding: 4px 10px; border-radius: 999px;">Projeto no ar</span>
+                <h3 style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: var(--text);">TBS Hotel</h3>
+                <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--text-dim);">O seu refúgio de tranquilidade em Manacapuru tem nome: TBS Hotel !</p>
+                <span style="display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-weight: 700; font-size: 14px; color: var(--cyan);">Visitar site ↗</span>
+              </div>
+            </a>
+            <a href="https://cristian-souza.github.io/aej-polpas/" target="_blank" rel="noopener" class="hv-card proj-slide" style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; color: inherit;">
+              <img src="images/aej-polpas.png" alt="A & J Polpas" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block;">
+              <div style="padding: 22px 22px 24px;">
+                <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cyan); background: var(--cyan-soft); padding: 4px 10px; border-radius: 999px;">Projeto no ar</span>
+                <h3 style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: var(--text);">A &amp; J Polpas</h3>
+                <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--text-dim);">Vendemos e entregamos polpa de fruta 100% natural direto na sua casa, em Manacapuru. Chame no WhatsApp e peça em poucos minutos.</p>
+                <span style="display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-weight: 700; font-size: 14px; color: var(--cyan);">Visitar site ↗</span>
+              </div>
+            </a>
+            <a href="https://cristian-souza.github.io/afilho-tattoo-arts/" target="_blank" rel="noopener" class="hv-card proj-slide" style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; color: inherit;">
+              <img src="images/afilho-tattoo-arts.png" alt="Afilho Tattoo Arts" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block;">
+              <div style="padding: 22px 22px 24px;">
+                <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cyan); background: var(--cyan-soft); padding: 4px 10px; border-radius: 999px;">Projeto no ar</span>
+                <h3 style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: var(--text);">Afilho Tattoo Arts</h3>
+                <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--text-dim);">Estúdio de tatuagem que transforma ideia em arte na pele. Confira o portfólio e agende sua sessão.</p>
+                <span style="display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-weight: 700; font-size: 14px; color: var(--cyan);">Visitar site ↗</span>
+              </div>
+            </a>
           </div>
-        </a>
-        <a href="https://cristian-souza.github.io/tbs-hotel/" target="_blank" rel="noopener" class="hv-card" style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; color: inherit;">
-          <img src="images/tbs-hotel.png" alt="TBS Hotel" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block;">
-          <div style="padding: 22px 22px 24px;">
-            <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cyan); background: var(--cyan-soft); padding: 4px 10px; border-radius: 999px;">Projeto no ar</span>
-            <h3 style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: var(--text);">TBS Hotel</h3>
-            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--text-dim);">O seu refúgio de tranquilidade em Manacapuru tem nome: TBS Hotel !</p>
-            <span style="display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-weight: 700; font-size: 14px; color: var(--cyan);">Visitar site ↗</span>
-          </div>
-        </a>
-        <a href="https://cristian-souza.github.io/aej-polpas/" target="_blank" rel="noopener" class="hv-card" style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; color: inherit;">
-          <img src="images/aej-polpas.png" alt="A & J Polpas" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block;">
-          <div style="padding: 22px 22px 24px;">
-            <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cyan); background: var(--cyan-soft); padding: 4px 10px; border-radius: 999px;">Projeto no ar</span>
-            <h3 style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: var(--text);">A &amp; J Polpas</h3>
-            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--text-dim);">Vendemos e entregamos polpa de fruta 100% natural direto na sua casa, em Manacapuru. Chame no WhatsApp e peça em poucos minutos.</p>
-            <span style="display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-weight: 700; font-size: 14px; color: var(--cyan);">Visitar site ↗</span>
-          </div>
-        </a>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 28px;">
+          <button type="button" id="projPrev" class="proj-arrow" aria-label="Projetos anteriores" style="width: 44px; height: 44px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text); transition: border-color .2s, color .2s;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div id="projDots" style="display: flex; align-items: center; gap: 8px;"></div>
+          <button type="button" id="projNext" class="proj-arrow" aria-label="Próximos projetos" style="width: 44px; height: 44px; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text); transition: border-color .2s, color .2s;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -410,7 +430,7 @@
 
   <!-- EMPRESA / INSTAURO -->
   <section style="background: var(--bg-alt); border-top: 1px solid var(--border);">
-    <div class="empresa-grid sec-pad" style="max-width: 1180px; margin: 0 auto; padding: 88px 28px; display: grid; grid-template-columns: .9fr 1.1fr; grid-template-areas: 'logo desc' 'feat desc'; gap: 32px 56px; align-items: start;">
+    <div class="empresa-grid sec-pad" style="max-width: 1180px; margin: 0 auto; padding: 88px 28px; display: grid; grid-template-columns: .9fr 1.1fr; grid-template-areas: 'logo desc'; gap: 32px 56px; align-items: start;">
       <!-- COLUNA ESQUERDA: logo -->
       <div style="grid-area: logo;">
         <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 28px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 50px -24px rgba(15,110,86,.4);">
@@ -428,29 +448,6 @@
         <h2 class="h2-big" style="font-family: 'Fraunces', serif; font-weight: 800; font-size: 40px; line-height: 1.08; letter-spacing: -.02em; margin: 14px 0 0; color: var(--text);">Instauro</h2>
         <p style="font-size: 17.5px; line-height: 1.65; color: var(--text-dim); margin: 22px 0 0;">A Instauro cria <strong style="color: var(--text);">sites, sistemas e agentes de IA sob medida</strong> para empresas que querem crescer no digital. Cada projeto é feito do zero, no jeito que o seu negócio precisa, sem modelo genérico e com toda a parte técnica por nossa conta.</p>
         <p style="font-size: 17.5px; line-height: 1.65; color: var(--text-dim); margin: 18px 0 0;">Nascemos para <strong style="color: var(--text);">facilitar a vida de quem toca um negócio</strong>: automatizar a tarefa manual que consome tempo, organizar a operação num lugar só e ajudar você a escalar, atraindo mais clientes e construindo autoridade online, sem precisar entender de tecnologia.</p>
-      </div>
-      <!-- BARRA DE DIFERENCIAIS (abaixo da logo) -->
-      <div class="feat-grid" style="grid-area: feat; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden;">
-        <div style="background: var(--surface); padding: 16px 5px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgba(15,110,86,.45));"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          <div style="font-weight: 700; font-size: 9px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.4; color: var(--text);">Desenvolvimento<br><span style="color: var(--text-dim); font-weight: 600;">Full-stack</span></div>
-        </div>
-        <div style="background: var(--surface); padding: 16px 5px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgba(15,110,86,.45));"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-          <div style="font-weight: 700; font-size: 9px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.4; color: var(--text);">Arquitetura<br><span style="color: var(--text-dim); font-weight: 600;">Escalável</span></div>
-        </div>
-        <div style="background: var(--surface); padding: 16px 5px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgba(15,110,86,.45));"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          <div style="font-weight: 700; font-size: 9px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.4; color: var(--text);">Segurança<br><span style="color: var(--text-dim); font-weight: 600;">E performance</span></div>
-        </div>
-        <div style="background: var(--surface); padding: 16px 5px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgba(15,110,86,.45));"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>
-          <div style="font-weight: 700; font-size: 9px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.4; color: var(--text);">Soluções inteligentes<br><span style="color: var(--text-dim); font-weight: 600;">E personalizadas</span></div>
-        </div>
-        <div style="background: var(--surface); padding: 16px 5px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 6px rgba(15,110,86,.45));"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-          <div style="font-weight: 700; font-size: 9px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.4; color: var(--text);">Foco, disciplina<br><span style="color: var(--text-dim); font-weight: 600;">E excelência</span></div>
-        </div>
       </div>
     </div>
   </section>
@@ -479,7 +476,7 @@
   <!-- CTA FINAL -->
   <section style="background: radial-gradient(120% 120% at 50% 0%, #E3EFE9 0%, #EFEAE0 55%, #F7F5F0 100%); color: var(--text); border-top: 1px solid rgba(15,110,86,.25);">
     <div style="max-width: 760px; margin: 0 auto; padding: 92px 28px; text-align: center;">
-      <h2 class="cta-big" style="font-family: 'Fraunces', serif; font-weight: 800; font-size: 42px; line-height: 1.08; letter-spacing: -.02em; margin: 0; color: var(--text);">Vamos conversar sobre como usar tecnologia pra vender mais sem mais esforço?</h2>
+      <h2 class="cta-big" style="font-family: 'Fraunces', serif; font-weight: 800; font-size: 42px; line-height: 1.08; letter-spacing: -.02em; margin: 0; color: var(--text);">Vamos conversar sobre como usar tecnologia pra vender mais sem esforço?</h2>
       <p style="font-size: 18px; line-height: 1.6; color: var(--text-dim); margin: 20px 0 0;">Fala com a gente no WhatsApp. A conversa é rápida, sem compromisso, e você já sai com um caminho claro do que dá pra melhorar.</p>
       <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="hv-lift" style="display: inline-flex; align-items: center; gap: 10px; margin-top: 32px; background: var(--cyan); color: var(--ink); font-weight: 700; font-size: 17px; padding: 17px 30px; border-radius: 12px; box-shadow: 0 18px 44px -16px rgba(15,110,86,.6); transition: transform .2s, filter .2s;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 018.413 3.488 11.82 11.82 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.85 9.85 0 001.599 5.283l-1 3.652 3.891-1.634zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414z"/></svg>
@@ -563,6 +560,72 @@
         if (history.replaceState) history.replaceState(null, '', hash);
       });
     });
+  })();
+
+  // carrossel de projetos: 2 por vez no desktop, 1 por vez no mobile
+  (function () {
+    var viewport = document.querySelector('.proj-viewport');
+    var track = document.getElementById('projTrack');
+    var dotsWrap = document.getElementById('projDots');
+    var prevBtn = document.getElementById('projPrev');
+    var nextBtn = document.getElementById('projNext');
+    if (!viewport || !track || !dotsWrap || !prevBtn || !nextBtn) return;
+
+    var slides = Array.prototype.slice.call(track.querySelectorAll('.proj-slide'));
+    var gap = 22;
+    var page = 0;
+
+    function itemsPerView() {
+      if (window.innerWidth <= 720) return 1;
+      if (window.innerWidth <= 1000) return 2;
+      return 3;
+    }
+
+    function pageCount() {
+      return Math.max(1, Math.ceil(slides.length / itemsPerView()));
+    }
+
+    function renderDots() {
+      dotsWrap.innerHTML = '';
+      var total = pageCount();
+      for (var i = 0; i < total; i++) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'proj-dot' + (i === page ? ' is-active' : '');
+        dot.setAttribute('aria-label', 'Ir para o grupo ' + (i + 1) + ' de projetos');
+        (function (idx) {
+          dot.addEventListener('click', function () { goTo(idx); });
+        })(i);
+        dotsWrap.appendChild(dot);
+      }
+    }
+
+    function update() {
+      var ipv = itemsPerView();
+      var vw = viewport.clientWidth;
+      var slideWidth = (vw - gap * (ipv - 1)) / ipv;
+      slides.forEach(function (slide) {
+        slide.style.width = slideWidth + 'px';
+      });
+      track.style.transform = 'translateX(-' + (page * (vw + gap)) + 'px)';
+      renderDots();
+      prevBtn.disabled = page === 0;
+      nextBtn.disabled = page === pageCount() - 1;
+    }
+
+    function goTo(index) {
+      page = Math.max(0, Math.min(index, pageCount() - 1));
+      update();
+    }
+
+    prevBtn.addEventListener('click', function () { goTo(page - 1); });
+    nextBtn.addEventListener('click', function () { goTo(page + 1); });
+    window.addEventListener('resize', function () {
+      page = Math.min(page, pageCount() - 1);
+      update();
+    });
+
+    update();
   })();
 </script>
 </body>
