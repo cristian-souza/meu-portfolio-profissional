@@ -1,0 +1,41 @@
+# ===== Instauro — configuracao Apache/Hostinger =====
+
+# Forca HTTPS e o dominio canonico sem "www"
+RewriteEngine On
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\.instauro\.com\.br$ [NC]
+RewriteRule ^ https://instauro.com.br%{REQUEST_URI} [L,R=301]
+
+# Remove ".html" da URL (opcional, deixa a URL mais limpa)
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^.]+)$ $1.html [NC,L]
+
+# Pagina de erro 404 padrao do site (evita listagem de diretorio quebrada)
+ErrorDocument 404 /index.html
+
+# Bloqueia listagem de diretorios
+Options -Indexes
+
+# ===== Compressao (Gzip) =====
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# ===== Cache do navegador (resolve o alerta de "expires headers" para imagens) =====
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(png|jpe?g|webp|svg|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

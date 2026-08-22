@@ -1,0 +1,24 @@
+# Instauro
+
+> A Instauro cria sites, sistemas sob medida e agentes de IA para WhatsApp para empresas brasileiras que querem atrair mais clientes e construir autoridade online. Atendimento 100% remoto, em todo o Brasil.
+
+Instauro é a marca de Cristian Souza, desenvolvedor e fundador, sediado em Manacapuru (AM), atendendo clientes em todo o Brasil.
+
+## Serviços
+
+- Sites e páginas que vendem: páginas profissionais, responsivas, com foco em conversão.
+- Agentes de IA para WhatsApp: atendimento automatizado que responde clientes, capta oportunidades e apoia agendamentos, 24h por dia.
+- Sistemas sob medida: soluções para organizar agenda, clientes, pedidos e processos internos num só lugar.
+
+## Projetos entregues
+
+- Mademoiselle Stilo & Beleza — salão de beleza em Manacapuru (AM): https://cristian-souza.github.io/mademoiselle-stilo-e-beleza/
+- TBS Hotel — hotel em Manacapuru (AM): https://cristian-souza.github.io/tbs-hotel/
+- A & J Polpas — venda e entrega de polpa de fruta em Manacapuru (AM): https://cristian-souza.github.io/aej-polpas/
+- Afilho Tattoo Arts — estúdio de tatuagem: https://cristian-souza.github.io/afilho-tattoo-arts/
+
+## Contato
+
+- WhatsApp: https://wa.me/5592993039924
+- E-mail: cristiansouza_dev@outlook.com
+- Site: https://instauro.com.br/
