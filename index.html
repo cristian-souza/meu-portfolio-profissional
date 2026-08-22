@@ -15,7 +15,7 @@
 <meta name="theme-color" content="#F7F5F0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="images/favicon/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="images/favicon/favicon-96x96.png">
 <link rel="shortcut icon" href="images/favicon/favicon.ico">
@@ -64,8 +64,8 @@
   .proj-slide { flex-shrink: 0; }
   .proj-arrow:hover:not(:disabled) { border-color: var(--cyan) !important; color: var(--cyan) !important; }
   .proj-arrow:disabled { opacity: .35; cursor: default; }
-  .proj-dot { width: 8px; height: 8px; padding: 0; border: none; border-radius: 50%; background: var(--border); cursor: pointer; transition: background .2s, transform .2s; }
-  .proj-dot.is-active { background: var(--cyan); transform: scale(1.25); }
+  .proj-dot { box-sizing: content-box; width: 8px; height: 8px; padding: 18px 8px; margin: -18px -8px; background-color: var(--border); background-clip: content-box; border: none; border-radius: 50%; cursor: pointer; transition: background-color .2s, transform .2s; }
+  .proj-dot.is-active { background-color: var(--cyan); transform: scale(1.25); }
 
   /* destaque dos links do menu ao passar o mouse */
   .nav-link { position: relative; transition: color .2s; }
@@ -81,7 +81,7 @@
   #projetos, #sobre, #contato, #servicos { scroll-margin-top: 84px; }
 
   /* botao hamburguer (menu mobile) */
-  .nav-toggle { display: none; flex: none; flex-direction: column; justify-content: center; gap: 5px; width: 46px; height: 42px; padding: 0; background: transparent; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; }
+  .nav-toggle { display: none; flex: none; flex-direction: column; justify-content: center; gap: 5px; width: 46px; height: 44px; padding: 0; background: transparent; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; }
   .nav-toggle span { display: block; width: 22px; height: 2px; margin: 0 auto; background: rgba(247,245,240,.9); border-radius: 2px; transition: transform .25s ease, opacity .2s ease; }
   .nav-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-toggle.is-open span:nth-child(2) { opacity: 0; }
@@ -353,7 +353,10 @@
         <div class="proj-viewport" style="overflow: hidden;">
           <div class="proj-track" id="projTrack" style="display: flex; gap: 22px;">
             <a href="https://cristian-souza.github.io/mademoiselle-stilo-e-beleza/" target="_blank" rel="noopener" class="hv-card proj-slide" style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; color: inherit;">
-              <img src="images/mademoiselle-stilo-e-beleza.png" alt="Mademoiselle Stilo & Beleza" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block;">
+              <picture style="display:block;">
+                <source srcset="images/mademoiselle-stilo-e-beleza.webp" type="image/webp">
+                <img src="images/mademoiselle-stilo-e-beleza.png" alt="Mademoiselle Stilo & Beleza" width="1904" height="909" loading="lazy" decoding="async" style="width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;display:block;">
+              </picture>
               <div style="padding: 22px 22px 24px;">
                 <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cyan); background: var(--cyan-soft); padding: 4px 10px; border-radius: 999px;">Projeto no ar</span>
                 <h3 style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: var(--text);">Mademoiselle Stilo &amp; Beleza</h3>
@@ -362,7 +365,10 @@
               </div>
             </a>
             <a href="https://cristian-souza.github.io/tbs-hotel/" target="_blank" rel="noopener" class="hv-card proj-slide" style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; color: inherit;">
-              <img src="images/tbs-hotel.png" alt="TBS Hotel" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block;">
+              <picture style="display:block;">
+                <source srcset="images/tbs-hotel.webp" type="image/webp">
+                <img src="images/tbs-hotel.png" alt="TBS Hotel" width="1908" height="906" loading="lazy" decoding="async" style="width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;display:block;">
+              </picture>
               <div style="padding: 22px 22px 24px;">
                 <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cyan); background: var(--cyan-soft); padding: 4px 10px; border-radius: 999px;">Projeto no ar</span>
                 <h3 style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: var(--text);">TBS Hotel</h3>
@@ -371,7 +377,10 @@
               </div>
             </a>
             <a href="https://cristian-souza.github.io/aej-polpas/" target="_blank" rel="noopener" class="hv-card proj-slide" style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; color: inherit;">
-              <img src="images/aej-polpas.png" alt="A & J Polpas" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block;">
+              <picture style="display:block;">
+                <source srcset="images/aej-polpas.webp" type="image/webp">
+                <img src="images/aej-polpas.png" alt="A & J Polpas" width="1907" height="912" loading="lazy" decoding="async" style="width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;display:block;">
+              </picture>
               <div style="padding: 22px 22px 24px;">
                 <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cyan); background: var(--cyan-soft); padding: 4px 10px; border-radius: 999px;">Projeto no ar</span>
                 <h3 style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: var(--text);">A &amp; J Polpas</h3>
@@ -380,7 +389,10 @@
               </div>
             </a>
             <a href="https://cristian-souza.github.io/afilho-tattoo-arts/" target="_blank" rel="noopener" class="hv-card proj-slide" style="display: block; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; color: inherit;">
-              <img src="images/afilho-tattoo-arts.png" alt="Afilho Tattoo Arts" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block;">
+              <picture style="display:block;">
+                <source srcset="images/afilho-tattoo-arts.webp" type="image/webp">
+                <img src="images/afilho-tattoo-arts.png" alt="Afilho Tattoo Arts" width="1904" height="898" loading="lazy" decoding="async" style="width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;display:block;">
+              </picture>
               <div style="padding: 22px 22px 24px;">
                 <span style="display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cyan); background: var(--cyan-soft); padding: 4px 10px; border-radius: 999px;">Projeto no ar</span>
                 <h3 style="font-family: 'Fraunces', serif; font-weight: 700; font-size: 20px; margin: 14px 0 8px; color: var(--text);">Afilho Tattoo Arts</h3>
@@ -458,7 +470,10 @@
       <div>
         <span style="font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--cyan);">Sobre</span>
         <div class="about-photo" style="margin-top: 24px; width: 100%; aspect-ratio: 1/1; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 0 40px -20px rgba(15,110,86,.4);">
-          <img src="images/foto.jpeg" alt="Foto de Cristian Souza" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture style="display:block; width: 100%; height: 100%;">
+            <source srcset="images/foto.webp" type="image/webp">
+            <img src="images/foto.jpeg" alt="Foto de Cristian Souza" width="1023" height="1537" loading="lazy" decoding="async" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+          </picture>
         </div>
       </div>
       <div>
@@ -495,8 +510,8 @@
       <div style="display: flex; gap: 40px;">
         <div style="display: flex; flex-direction: column; gap: 10px;">
           <span style="font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cyan);">Contato</span>
-          <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="hv-white" style="color: var(--text-dim); font-size: 14.5px; transition: color .2s;">WhatsApp</a>
-          <a href="mailto:cristiansouza_dev@outlook.com" class="hv-white" style="color: var(--text-dim); font-size: 14.5px; transition: color .2s;">E-mail</a>
+          <a href="https://wa.me/5592993039924?text=Oi!%20Vi%20o%20seu%20portf%C3%B3lio%20e%20queria%20saber%20mais." target="_blank" rel="noopener" class="hv-white" style="display: inline-block; padding: 14px 0; margin: -14px 0; color: var(--text-dim); font-size: 14.5px; transition: color .2s;">WhatsApp</a>
+          <a href="mailto:cristiansouza_dev@outlook.com" class="hv-white" style="display: inline-block; padding: 14px 0; margin: -14px 0; color: var(--text-dim); font-size: 14.5px; transition: color .2s;">E-mail</a>
         </div>
         <div style="display: flex; flex-direction: column; gap: 10px;">
           <span style="font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cyan);">Onde atuo</span>
